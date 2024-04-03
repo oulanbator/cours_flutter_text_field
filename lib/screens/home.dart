@@ -11,9 +11,9 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   var _prenomController = TextEditingController();
   var _emailController = TextEditingController();
-  // var _formKey = GlobalKey<FormState>();
-  // String _selectedOption = "";
-  // String _radioOption = "";
+  var _formKey = GlobalKey<FormState>();
+  String _selectedOption = "";
+  String _radioOption = "";
   var _prenom = "";
   var _email = "";
 
@@ -94,94 +94,94 @@ class _HomeState extends State<Home> {
   Widget _form() {
     return Form(
       // ----- voir key
-      // key: _formKey,
+      key: _formKey,
       child: Column(
         // onSubmitted ne fonctionne plus dans un TextFormField car on va
         // soummettre la validation du formulaire et non du TextField
         children: [
           TextFormField(
-              // ----- voir valeur initiale
-              // initialValue: "John",
-              // controller: _prenomController,
-              // decoration: const InputDecoration(helperText: "Prénom"),
-              // validator: (String? value) {
-              //   if (value == null || value.isEmpty) {
-              //     return 'Ce champs doit être renseigné';
-              //   }
-              //   if (value.length < 2) {
-              //     return "Prénom trop court";
-              //   }
-              //   return null;
-              // },
-              // onSaved: (value) => setState(() {
-              //   _prenom = value!;
-              // }),
-              ),
+            // ----- voir valeur initiale
+            // initialValue: "John",
+            // controller: _prenomController,
+            decoration: const InputDecoration(helperText: "Prénom"),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Ce champs doit être renseigné';
+              }
+              if (value.length < 2) {
+                return "Prénom trop court";
+              }
+              return null;
+            },
+            onSaved: (value) => setState(() {
+              _prenom = value!;
+            }),
+          ),
           TextFormField(
-              // decoration: const InputDecoration(helperText: "Email"),
-              // validator: (value) {
-              //   if (value == null || value.isEmpty) {
-              //     return 'Ce champ doit être renseigné';
-              //   }
-              //   // Avec package email_validator
-              //   if (!EmailValidator.validate(value)) {
-              //     return 'Saisir un email valide';
-              //   }
-              //   // Avec une Regex
-              //   // final RegExp regex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-              //   // if (!regex.hasMatch(value)) {
-              //   //   return 'Saisir un email valide';
-              //   // }
-              //   return null;
-              // },
-              // onSaved: (value) => setState(() {
-              //   _email = value!;
-              // }),
-              ),
+            decoration: const InputDecoration(helperText: "Email"),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Ce champ doit être renseigné';
+              }
+              // Avec package email_validator
+              if (!EmailValidator.validate(value)) {
+                return 'Saisir un email valide';
+              }
+              // Avec une Regex
+              // final RegExp regex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+              // if (!regex.hasMatch(value)) {
+              //   return 'Saisir un email valide';
+              // }
+              return null;
+            },
+            onSaved: (value) => setState(() {
+              _email = value!;
+            }),
+          ),
 
           // ----- TEXT AREA ------
-          // TextFormField(
-          //   maxLines: 5,
-          //   decoration: InputDecoration(
-          //     helperText: 'Votre message',
-          //   ),
-          // ),
+          TextFormField(
+            maxLines: 5,
+            decoration: InputDecoration(
+              helperText: 'Votre message',
+            ),
+          ),
 
           // ----- DROPDOWN (Select) -----
-          // DropdownButtonFormField(
-          //   value: _selectedOption,
-          //   items: [
-          //     DropdownMenuItem(
-          //       value: "",
-          //       child: Text(""),
-          //     ),
-          //     DropdownMenuItem(
-          //       value: "option1",
-          //       child: Text("Option1"),
-          //     ),
-          //     DropdownMenuItem(
-          //       value: "option2",
-          //       child: Text("Option2"),
-          //     ),
-          //     DropdownMenuItem(
-          //       value: "option3",
-          //       child: Text("Option3"),
-          //     ),
-          //   ],
-          //   onChanged: (value) => setState(() {
-          //     if (value != null) {
-          //       _selectedOption = value;
-          //     } else {
-          //       _selectedOption = "";
-          //     }
-          //   }),
-          //   validator: (value) {
-          //     if (value == null || value.isEmpty) {
-          //       return 'Ce champs doit être renseigné';
-          //     }
-          //     return null;
-          //   },
-          // ),
+          DropdownButtonFormField(
+            value: _selectedOption,
+            items: [
+              DropdownMenuItem(
+                value: "",
+                child: Text(""),
+              ),
+              DropdownMenuItem(
+                value: "option1",
+                child: Text("Option1"),
+              ),
+              DropdownMenuItem(
+                value: "option2",
+                child: Text("Option2"),
+              ),
+              DropdownMenuItem(
+                value: "option3",
+                child: Text("Option3"),
+              ),
+            ],
+            onChanged: (value) => setState(() {
+              if (value != null) {
+                _selectedOption = value;
+              } else {
+                _selectedOption = "";
+              }
+            }),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Ce champs doit être renseigné';
+              }
+              return null;
+            },
+          ),
 
           // ----- BOUTONS RADIO -----
           // RadioListTile(
@@ -282,13 +282,13 @@ class _HomeState extends State<Home> {
 
   _submitForm() {
     // Validation
-    // if (_formKey.currentState != null) {
-    //   if (_formKey.currentState!.validate()) {
-    //     // _formKey.currentState!.save();
-    //     // print("Validate");
-    //     // print(_prenomController.text);
-    //     // print(_emailController.text);
-    //   }
-    // }
+    if (_formKey.currentState != null) {
+      if (_formKey.currentState!.validate()) {
+        // _formKey.currentState!.save();
+        // print("Validate");
+        // print(_prenomController.text);
+        // print(_emailController.text);
+      }
+    }
   }
 }

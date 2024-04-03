@@ -1,4 +1,6 @@
+import 'package:cours_flutter_text_field/screens/form.dart';
 import 'package:cours_flutter_text_field/screens/home.dart';
+import 'package:cours_flutter_text_field/screens/text_fields.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
